@@ -1,0 +1,92 @@
+/* Components */
+@use './components/reset';
+@use './components/colors';
+@use './components/mixins';
+@use './components/fonts';
+@use './components/loader';
+
+
+
+
+
+/* Pages */
+@use './pages/nav';
+@use './pages/accueil';
+@use './pages/projects';
+@use './pages/contact';
+
+
+
+
+
+
+
+
+/* Style Base */
+*{
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+
+body {
+    max-width: 100vw;
+    width: 100%;
+    height: 100%;
+    background: colors.$bg;
+    font-family: "Roslindale Display Condensed", sans-serif;
+    overflow-x: hidden;
+}
+
+main {
+    max-width: 120rem;
+    height: 100%;
+    position: relative;
+    z-index: 0;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+strong {
+    font-weight: bold;
+}
+
+a{
+    text-decoration: none!important;
+    text-transform: none!important;
+}
+
+
+svg.squiggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    z-index: 50;
+    // mix-blend-mode: difference;
+  
+  }
+  
+  svg.squiggle path {
+    stroke: colors.$overlay-bg!important;
+    stroke-width: 0.8rem!important;
+  }
+
+
+  .scrollBar {
+    position: absolute;
+    z-index: -1;
+    height: auto;
+    width: 100%;
+    top: 20vh;
+    left: 0;
+  }
+
+@media screen and (max-width: 1400px) {
+    .scrollBar {
+        display: none;
+    }
+}

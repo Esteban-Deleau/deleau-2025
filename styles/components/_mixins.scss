@@ -1,0 +1,46 @@
+@use './colors';
+@use './fonts';
+
+@mixin title-font {
+        font-family: fonts.$title-font;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 4.5rem;
+
+        @media screen and (max-width: 1350px) {
+            font-size: 3rem;
+        }
+}
+
+@mixin h2-style {
+        font-family: fonts.$body-font;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 2.5rem;
+
+        @media screen and (max-width: 375px) {
+            font-size: 2rem;
+        }
+}
+
+@mixin tag {
+        font-family: fonts.$body-font;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 1rem;
+        color: colors.$tag;
+}
+
+@mixin text {
+        font-family: fonts.$body-font;
+        font-style: normal;
+        font-size: 1rem;
+        color: colors.$text;
+}
+
+
+@mixin flex-center{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }

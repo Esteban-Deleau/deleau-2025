@@ -1,0 +1,175 @@
+@use '../components/colors';
+@use '../components/mixins';
+@use '../components/fonts';
+
+.contact-section {
+    height: 100vh;
+    width: 100vw;
+    @include mixins.flex-center;
+    z-index: 500;
+    padding: 50px 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contact-left, .contact-right {
+    width: 50%;
+    padding: 20px;
+    @include mixins.flex-center;
+}
+
+.contact-right {
+    flex-direction: column;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    font-size: 2.5rem;
+
+    .contact-link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: colors.$text;
+        width: 100%;
+        gap: 30px;
+
+    }
+
+    .contact-preview {
+        scale: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;  /* Taille fixe en largeur */
+        height: auto;  /* Hauteur ajustée automatiquement */
+        max-height: 300px; /* Optionnel : éviter que certaines images soient trop grandes */
+        pointer-events: none;
+        z-index: 10;
+        object-fit: contain; /* S'assure que l'image reste entière sans être coupée */
+    }
+}
+
+/* Effet d'apparition de l'image */
+@keyframes fadeIn {
+    from { scale: 0; }
+    to { scale: 1; }
+}
+@keyframes fadeOut {
+    from { scale: 1; }
+    to { scale: 0; }
+}
+
+
+
+.contact-btn:hover::before {
+    width: 1800px;
+    height: 1800px;
+}
+
+/* Responsive */
+@media screen and (max-width: 1200px) {
+    .contact-section {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .contact-left, .contact-right {
+        width: 100%;
+        text-align: center;
+    }
+
+    .contact-links {
+        font-size: 2rem;
+    }
+
+    .contact-btn {
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .contact-links {
+        font-size: 1.8rem;
+    }
+    
+    .contact-btn {
+        font-size: 2rem;
+    }
+
+    .contact-preview {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .contact-links {
+        width: 80%;
+    }
+}
+
+
+.btn2 {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    border: 2px solid colors.$overlay-bg;
+    text-transform: uppercase;
+    color: colors.$overlay-bg;
+    text-decoration: none;
+    @include mixins.h2-style;
+    transition: 0.3s;
+  }
+  
+  .btn2::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% - -2px);
+    background-color: colors.$bg;
+    transition: 0.3s ease-out;
+    transform: scaleY(1);
+  }
+  
+  .btn2::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% - 50px);
+    background-color: colors.$bg;
+    transition: 0.3s ease-out;
+    transform: scaleY(1);
+  }
+  
+  .btn2:hover::before {
+    transform: translateY(-25px);
+    height: 0;
+  }
+  
+  .btn2:hover::after {
+    transform: scaleX(0);
+    transition-delay: 0.15s;
+  }
+  
+  .btn2:hover {
+    border: 2px solid colors.$overlay-bg;
+  }
+  
+  .btn2 span {
+    position: relative;
+    z-index: 3;
+  }
+  
+  button {
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+  }

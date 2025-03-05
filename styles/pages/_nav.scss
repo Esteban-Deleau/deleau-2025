@@ -1,0 +1,221 @@
+@use '../components/colors';
+
+/* Animation de flottement */
+@keyframes flotter {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(5px, -10px) rotate(2deg);
+    }
+    50% {
+        transform: translate(-5px, -15px) rotate(-2deg);
+    }
+    75% {
+        transform: translate(3px, -8px) rotate(1deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+
+/* Applique l'animation */
+.flotter {
+    animation: flotter 6s ease-in-out infinite;
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    padding: 40px;
+    z-index: 1000;
+
+    & img{
+        width: 100px;
+        height: auto;
+    }
+}
+
+
+#toogle-btn {
+    position: fixed;
+    top: 0;
+    right: 50px;
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2em;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.btn-outline {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid colors.$overlay-bg;
+}
+
+.btn-outline-1 {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: morph 4s infinite linear;
+} 
+
+.btn-outline-2 {
+    border-radius: 53% 47% 43% 57% / 51% 39% 61% 49%;
+    animation: rotate 15s infinite linear;
+}
+
+@keyframes morph {
+    0%, 100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+}
+@keyframes rotate {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+}
+
+#hamburger {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    z-index: 200;
+}
+
+#hamburger span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: colors.$overlay-bg;
+    transition: transform 0.25s;
+}
+
+#hamburger span::before {
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    content: "";
+    width: 18px;
+    height: 2px;
+    background: colors.$overlay-bg;
+    transform: translateY(-4px);
+    transition: transform 0.25s;
+}
+
+#hamburger.active span {
+    transform: rotate(45deg);
+}
+
+#hamburger.active span::before {
+    top: unset;
+    width: 24px;
+    transform: rotate(-90deg);
+}
+
+
+.menu-outline {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid colors.$overlay-bg;
+    z-index: 1; /* Place l’outline sous les liens */
+}
+
+
+.menu-outline-1 {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: morph 4s infinite linear;
+} 
+
+.menu-outline-2 {
+    border-radius: 53% 47% 43% 57% / 51% 39% 61% 49%;
+    animation: rotate 15s infinite linear;
+}
+
+.menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 40vw;
+    height: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 50%;
+    background: colors.$bg;
+    color: colors.$overlay-bg;
+    z-index: 100;
+    translate: none;
+    rotate: none;
+    scale: none;
+    transform: translate(-50%, -50%) translate(-0.195px, -0.195px) scale(0, 0);
+    transition: transform 0.5s ease; /* Animation de transition */
+}
+
+
+.menu a {
+    font-size: 50px;
+    color: colors.$overlay-bg;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 200; /* Z-index pour l'interaction */
+    display: inline-block; /* Nécessaire pour la transformation */
+    position: relative;
+    transition: transform 0.3s ease; /* Transition pour la couleur et l'échelle */
+}
+
+.menu a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px; /* Épaisseur de la ligne d'animation */
+    background-color: colors.$overlay-bg;
+    transform: scaleX(0); /* Initialement caché */
+    transform-origin: bottom left; /* Origine de la transformation */
+    transition: transform 0.3s ease; /* Animation de la transformation */
+}
+
+.menu a:hover {
+    transform: scale(1.05); /* Agrandissement léger */
+}
+
+.menu a:hover::before {
+    transform: scaleX(1); /* Fait apparaître la ligne */
+}
+
+@media screen and (max-width: 768px) {
+    .menu {
+        width: 70vw;
+        height: 70vw;
+        a{
+            font-size: 2rem;
+        }
+    }
+
+    #toogle-btn {
+        top: -10px;
+        right: 10px;
+
+    }
+}

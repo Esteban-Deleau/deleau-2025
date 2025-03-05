@@ -1,0 +1,197 @@
+@use '../components/colors';
+@use '../components/mixins';
+@use '../components/fonts';
+
+/* Style général de la modale */
+.dialog {
+    inset: 0;
+    z-index: 1000;
+    max-block-size: min(80vh, 100%);
+    background-color: colors.$bg;
+    color: colors.$text;
+    overflow: hidden;
+    animation: scaleDown 0.5s ease-in-out forwards;
+    border-radius: 0.5rem;
+    padding: 40px;
+    display: none;
+    width: 1200px;
+    gap: 20px;
+    padding: 50px;
+    border: none;
+}
+
+/* Animation d'entrée pour l'ouverture */
+@keyframes scaleDown {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1); 
+    }
+}
+
+/* Animation de glissement vers le haut lorsque la modale est ouverte */
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
+
+/* Lorsqu'une modale est ouverte */
+.dialog[open] {
+    animation: slideInUp 0.5s ease-out forwards;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+/* Style pour l'arrière-plan de la modale (flou) */
+.dialog::backdrop {
+  backdrop-filter: blur(0.25rem);
+}
+
+/* Lorsque la modale est fermée ou non ouverte */
+.dialog:not([open]) {
+    pointer-events: none; 
+    opacity: 0;
+}
+
+/* Bouton de fermeture */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: none;
+    z-index: 10000000;
+}
+
+/* Effet de survol du bouton de fermeture */
+.close-btn:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
+/* Les croix de fermeture (X et Y) */
+.X {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    width: 2em;
+    height: 1.5px;
+    background-color: #000;
+    transform: rotate(45deg);
+}
+
+.Y {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    width: 2em;
+    height: 1.5px;
+    background-color: #000;
+    transform: rotate(-45deg);
+}
+
+/* Contenu d'images dans la modale */
+.dialog-text {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    max-height: 400px;
+    overflow-y: scroll;
+    padding-top: 30px;
+    gap: 15px;
+
+    h2{
+        @include mixins.h2-style;
+    }
+
+    h4{
+        @include mixins.tag;
+    }
+
+    p{
+        @include mixins.text
+    }
+
+    .competences{
+        display: flex;
+        max-height: 100px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+
+        img{
+            width: 50px;
+        }
+    }
+
+}
+.dialog-img {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 60%;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.dialog-img img {
+    height: 100%;
+}
+
+
+@media screen and (max-width: 768px) {
+    .dialog {
+        width: 90vw;
+        padding: 35px;
+    }
+
+    .dialog[open] {
+        flex-direction: column;        
+    }
+
+    .dialog-text {
+        width: 90%;
+        order: 1;
+    }
+
+    .dialog-img {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        max-height: 400px;
+        order: 2;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .dialog-text {    
+        .competences{
+            display: flex;
+            max-height: 100px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+    
+            img{
+                width: 40px;
+            }
+        }
+    
+    }
+}

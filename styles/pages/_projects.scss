@@ -1,0 +1,158 @@
+@use '../components/colors';
+@use '../components/mixins';
+@use '../components/fonts';
+@use '../components/modal';
+
+
+section.gallery {
+    display: grid;
+    width: 100vw;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 280px;
+  
+    position: relative;
+    z-index: 1;
+  
+    gap: 1rem;
+    padding: 5rem 2rem;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .pos1 {
+    grid-column: 2 / -1;
+    grid-row: 1 / span 2;
+    
+  }
+  
+  .pos2 {
+    grid-column: 3;
+    grid-row: 3 / span 2;
+  }
+  
+  .pos3 {
+    grid-column: 1 / 3;
+    grid-row: 4 / span 2;
+  }
+  
+  .pos4 {
+    grid-column: 2 / -1;
+    grid-row: 6 / span 2;
+  }
+  
+  .pos5 {
+    grid-column: 1;
+    grid-row: 7 / span 2;
+  }
+
+
+
+
+  /* Style de la modale */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 50vh;
+  overflow: none;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Contenu de la modale */
+
+
+
+
+
+
+
+
+
+
+
+
+.container-blur{
+  border-radius: 40px;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+  img{
+      inset: 0;
+      position: absolute;
+      transition: filter 0.5s ease-in-out;
+  }
+
+  &:hover img{
+      filter: blur(6px) brightness(0.5);
+  }
+}
+
+.blur-anime{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+  color: white;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: 
+      opacity 0.5s ease-in-out, 
+      transform 0.5s ease-in-out;
+
+  h2{
+      font-size: 4rem;
+  }
+}
+
+
+.container-blur:hover .blur-anime{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+
+
+
+@media screen and (max-width: 768px) {
+  section.gallery {
+    grid-template-columns: 1fr; // Une seule colonne
+    padding: 2rem 1rem; // Ajustement du padding
+    max-width: 100vw;
+  }
+
+  // Supprime les positions de grid inutiles
+  .pos1, .pos2, .pos3, .pos4, .pos5 {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .container-blur{ 
+    img{
+        filter: blur(6px) brightness(0.5);
+    }
+  }
+
+  .container-blur .blur-anime{
+    transform: translateY(0);
+    opacity: 1;
+    h2{
+      font-size: 3rem;
+    }
+  }
+  
+}
+
